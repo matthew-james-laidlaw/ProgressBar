@@ -10,12 +10,13 @@ ProgressBarView::ProgressBarView(int mTerminalRowIndex)
     , mCurrentItem { 1 }
     , mTerminalRowIndex { mTerminalRowIndex }
 {}
-    
+  
 void ProgressBarView::Update(int percentComplete)
 {
     mBuffer[mCurrentItem] = '=';
-    Draw();
     ++mCurrentItem;
+
+    Draw();
 }
     
 void ProgressBarView::Draw()
