@@ -1,0 +1,2 @@
+add_executable(testprogressbar TestProgressBar.cpp)
+target_link_libraries(testprogressbar gtest_main progressbar)
