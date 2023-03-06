@@ -1,2 +1,12 @@
-add_executable(testprogressbar TestProgressBar.cpp)
-target_link_libraries(testprogressbar gtest_main progressbar)
+add_executable(
+    testprogressbar
+        TestCanvas.cpp
+        TestPubSub.cpp
+        TestView.cpp
+)
+
+target_link_libraries(
+    testprogressbar
+        progressbar
+        gmock_main
+)

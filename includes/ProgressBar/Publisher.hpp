@@ -2,7 +2,7 @@
 
 #include "Subscriber.hpp"
 
-class Observable
+class Publisher
 {
 public:
     virtual void Subscribe(Subscriber& subscriber) = 0;
