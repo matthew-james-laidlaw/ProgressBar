@@ -1,3 +1,5 @@
+enable_testing()
+
 add_executable(
     testprogressbar
         TestCanvas.cpp
@@ -10,3 +12,6 @@ target_link_libraries(
         progressbar
         gmock_main
 )
+
+include(GoogleTest)
+gtest_discover_tests(testprogressbar)
