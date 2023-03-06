@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ProgressTracker.hpp"
+#include "Tracker.hpp"
 #include "Canvas.hpp"
 #include "ThreadPool.hpp"
 
@@ -9,10 +9,10 @@
 class ProgressBarSet
 {
 public:
-    ProgressBarSet(std::vector<ProgressTracker> &tasks);
+    ProgressBarSet(std::vector<ProgressBar::Tracker> &tasks);
     void Run();
 private:
-    std::vector<ProgressTracker> &mTasks;
+    std::vector<ProgressBar::Tracker> &mTasks;
     Canvas mCanvas;
     ThreadPool mThreadPool;
 };

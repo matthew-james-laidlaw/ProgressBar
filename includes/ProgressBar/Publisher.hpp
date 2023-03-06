@@ -5,5 +5,5 @@
 class Publisher
 {
 public:
-    virtual void Subscribe(Subscriber& s) = 0;
+    virtual void Subscribe(Subscriber& subscriber) = 0;
 };

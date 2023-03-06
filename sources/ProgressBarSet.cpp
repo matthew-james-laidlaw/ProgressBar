@@ -1,13 +1,17 @@
 #include <ProgressBar/ProgressBarSet.hpp>
-#include <ProgressBar/ProgressBarView.hpp>
+#include <ProgressBar/View.hpp>
 #include <ProgressBar/Canvas.hpp>
 #include <ProgressBar/Terminal.hpp>
 #include <ProgressBar/ThreadPool.hpp>
+#include <ProgressBar/Tracker.hpp>
 
 #include <iostream>
 #include <thread>
 
-ProgressBarSet::ProgressBarSet(std::vector<ProgressTracker>& tasks)
+using ProgressBar::Tracker;
+using ProgressBar::View;
+
+ProgressBarSet::ProgressBarSet(std::vector<Tracker>& tasks)
     : mTasks { tasks }
     , mCanvas { new Terminal }
     , mThreadPool { mTasks.size() }
@@ -15,13 +19,21 @@ ProgressBarSet::ProgressBarSet(std::vector<ProgressTracker>& tasks)
 
 void ProgressBarSet::Run()
 {
-    std::vector<ProgressBarView> progressBars;
-
+    std::vector<std::thread> threads(mTasks.size());
+    std::vector<View> progressBars(mTasks.size());
+    
+    for (int i = 0; i < threads.size(); ++i)
+    {
+        progressBars[i] = View();
+    }
+    
     for (int i = 0; i < mTasks.size(); ++i)
     {
-        progressBars.emplace_back(i);
-        mThreadPool.Enqueue(i, mTasks[i], progressBars[i]);
+        threads[i] = std::thread(&Tracker::Subscribe, std::ref(mTasks[i]), std::ref(progressBars[i]));
     }
-
-    mThreadPool.Execute();
+    
+    for (int i = 0; i < mTasks.size(); ++i)
+    {
+        threads[i].join();
+    }
 }

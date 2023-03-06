@@ -2,17 +2,15 @@
 
 #include <algorithm>
 
-using namespace ProgressBar;
+using ProgressBar::View;
 
 View::View()
     : mBuffer { "[                ]" }
 {}
 
-void View::Update(double percentComplete)
+void View::Update()
 {
-    int shadedBarLength = (int)((double)BAR_LENGTH * (percentComplete / 100));
-    mBuffer = "[                ]";
-    std::fill(mBuffer.begin() + 1, mBuffer.begin() + shadedBarLength, '=');
+    
 }
 
 std::string View::GetBuffer()

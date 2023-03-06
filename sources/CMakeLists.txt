@@ -1,11 +1,10 @@
 add_library(
     progressbar
         Canvas.cpp
-        ProgressTracker.cpp
         ProgressBarSet.cpp
-        ProgressBarView.cpp
         Terminal.cpp
         ThreadPool.cpp
+        Tracker.cpp
         View.cpp
 )
 

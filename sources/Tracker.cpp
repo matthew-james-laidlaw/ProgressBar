@@ -1,22 +1,23 @@
-#include <ProgressBar/ProgressTracker.hpp>
+#include <ProgressBar/Tracker.hpp>
 #include <ProgressBar/ProgressBarSet.hpp>
-#include <ProgressBar/ProgressBarView.hpp>
 
 #include <iostream>
 #include <mutex>
 #include <thread>
 #include <vector>
 
-ProgressTracker::ProgressTracker(std::chrono::milliseconds delay)
+using ProgressBar::Tracker;
+
+Tracker::Tracker(std::chrono::milliseconds delay)
     : mDelay { delay }
 {}
 
-void ProgressTracker::Subscribe(Subscriber& sub)
+void Tracker::Subscribe(Subscriber& sub)
 {
     for (int i = 0; i < 32; ++i)
     {
         int percentComplete = (int)(float(i) / 32);
-        sub.Update(percentComplete);
+        sub.Update();
         std::this_thread::sleep_for(mDelay);
     }
 }

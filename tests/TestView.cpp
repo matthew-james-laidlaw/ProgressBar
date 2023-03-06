@@ -19,7 +19,7 @@ TEST(View, UpdateAddsCorrectNumberOfShadedBlocks)
     for (int i = 0; i < 16; ++i)
     {
         percentComplete += 6.25;
-        view.Update(percentComplete);
+        view.Update();
         expectedBuffer[i + 1] = '=';
         EXPECT_EQ(view.GetBuffer(), expectedBuffer);
     }
