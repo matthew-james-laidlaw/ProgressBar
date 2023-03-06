@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Subscriber.hpp"
+#include "Terminal.hpp"
 
 #include <string>
 
@@ -17,6 +18,8 @@ public:
 private:
     void Draw();
     std::string mBuffer;
+    int mCurrentItem;
+    Terminal mTerminal;
 };
 
 };

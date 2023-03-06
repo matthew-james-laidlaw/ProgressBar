@@ -1,4 +1,4 @@
 #pragma once
 
-#include "ProgressTracker.hpp"
-#include "ProgressBarSet.hpp"
+#include "Tracker.hpp"
+#include "View.hpp"

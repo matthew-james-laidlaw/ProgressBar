@@ -12,12 +12,11 @@ Tracker::Tracker(std::chrono::milliseconds delay)
     : mDelay { delay }
 {}
 
-void Tracker::Subscribe(Subscriber& sub)
+void Tracker::Subscribe(Subscriber& subscriber)
 {
-    for (int i = 0; i < 32; ++i)
+    for (int i = 0; i < 16; ++i)
     {
-        int percentComplete = (int)(float(i) / 32);
-        sub.Update();
+        subscriber.Update();
         std::this_thread::sleep_for(mDelay);
     }
 }

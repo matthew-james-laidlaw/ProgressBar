@@ -1,61 +1,18 @@
-#include <ProgressBar/Publisher.hpp>
-#include <ProgressBar/Subscriber.hpp>
-#include <ProgressBar/Terminal.hpp>
+#include <ProgressBar/ProgressBar.hpp>
 
-#include <iostream>
-#include <string>
-#include <thread>
 #include <chrono>
 
-class Progress final : public Publisher
-{
-public:
-    void Subscribe(Subscriber& s)
-    {
-        for (int i = 0; i < 16; ++i)
-        {
-            s.Update();
-            std::this_thread::sleep_for(std::chrono::milliseconds(10));
-        }
-    }
-};
+using ProgressBar::Tracker;
+using ProgressBar::View;
 
-class View final : public Subscriber
-{
-public:
-
-    View()
-        : mBuffer { "[                ]" }
-        , mCurrentItem { 1 }
-        , mTerminal {}
-    {}
-
-    void Update()
-    {
-        mBuffer[mCurrentItem++] = '=';
-        Draw();
-    }
-
-private:
-
-    void Draw()
-    {
-        mTerminal.MakeCursorInvisible();
-        mTerminal.MoveCursor(2, 0);
-        std::cout << mBuffer << std::endl;
-        mTerminal.MakeCursorVisible();
-    }
-
-    std::string mBuffer;
-    int mCurrentItem;
-    Terminal mTerminal;
-
-};
+using std::chrono::milliseconds;
 
 int main()
 {
-    Progress progress;
+    Tracker tracker(milliseconds(25));
+    
     View view;
+    tracker.Subscribe(view);
 
-    progress.Subscribe(view);
+    return 0;
 }

@@ -11,7 +11,7 @@ class Tracker final : public Publisher
 {
 public:
     explicit Tracker(std::chrono::milliseconds delay);
-    void Subscribe(Subscriber& sub);
+    void Subscribe(Subscriber& subscriber);
 private:
     std::chrono::milliseconds mDelay;
 };
