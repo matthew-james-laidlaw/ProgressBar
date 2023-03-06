@@ -13,6 +13,11 @@ public:
     MOCK_METHOD(void, MoveCursor, (unsigned int row, unsigned int column), (const));
 };
 
+TEST(a, b)
+{
+    EXPECT_EQ(1, 1);
+}
+
 TEST(Canvas, Canvas)
 {
     MockTerminal mockTerminal;
