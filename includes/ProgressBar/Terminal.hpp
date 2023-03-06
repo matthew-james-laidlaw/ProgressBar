@@ -11,6 +11,7 @@ public:
 
 class Terminal final : public ITerminal
 {
+public:
     void MakeCursorInvisible() const;
     void MakeCursorVisible() const;
     void MoveCursor(unsigned int row, unsigned int column) const;

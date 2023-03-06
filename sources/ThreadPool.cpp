@@ -3,12 +3,12 @@
 #include <ProgressBar/ProgressBarView.hpp>
 
 ThreadPool::ThreadPool(unsigned long i)
-    : mThreads { i }
+    : mThreads { 0 }
 {}
 
 void ThreadPool::Enqueue(int i, ProgressTracker& task, ProgressBarView& view)
 {
-    mThreads[i] = std::thread(&ProgressTracker::Subscribe, std::ref(task), std::ref(view));
+    mThreads.emplace_back(&ProgressTracker::Subscribe, std::ref(task), std::ref(view));
 }
 
 void ThreadPool::Execute()

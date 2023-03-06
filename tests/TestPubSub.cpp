@@ -1,8 +1,9 @@
+#include <gtest/gtest.h>
+
 #include <ProgressBar/Publisher.hpp>
 #include <ProgressBar/Subscriber.hpp>
 #include <ProgressBar/Terminal.hpp>
 
-#include <iostream>
 #include <string>
 #include <thread>
 #include <chrono>
@@ -15,7 +16,7 @@ public:
         for (int i = 0; i < 16; ++i)
         {
             s.Update();
-            std::this_thread::sleep_for(std::chrono::milliseconds(10));
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
         }
     }
 };
@@ -41,8 +42,8 @@ private:
     void Draw()
     {
         mTerminal.MakeCursorInvisible();
-        mTerminal.MoveCursor(2, 0);
-        std::cout << mBuffer << std::endl;
+        mTerminal.MoveCursor(0, 0);
+        std::cout << mBuffer;
         mTerminal.MakeCursorVisible();
     }
 
@@ -52,7 +53,7 @@ private:
 
 };
 
-int main()
+TEST(PubSub, PubSub)
 {
     Progress progress;
     View view;

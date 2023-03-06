@@ -14,22 +14,14 @@ ProgressBarSet::ProgressBarSet(std::vector<ProgressTracker>& tasks)
 {}
 
 void ProgressBarSet::Run()
-{   
-    std::vector<std::thread> threads(mTasks.size());
+{
     std::vector<ProgressBarView> progressBars;
-    
-    for (int i = 0; i < threads.size(); ++i)
+
+    for (int i = 0; i < mTasks.size(); ++i)
     {
         progressBars.emplace_back(i);
+        mThreadPool.Enqueue(i, mTasks[i], progressBars[i]);
     }
-    
-    for (int i = 0; i < mTasks.size(); ++i)
-    {
-        threads[i] = std::thread(&ProgressTracker::Subscribe, std::ref(mTasks[i]), std::ref(progressBars[i]));
-    }
-    
-    for (int i = 0; i < mTasks.size(); ++i)
-    {
-        threads[i].join();
-    }
+
+    mThreadPool.Execute();
 }

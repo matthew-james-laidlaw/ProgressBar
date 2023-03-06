@@ -10,7 +10,7 @@
 ProgressTracker::ProgressTracker(std::chrono::milliseconds delay)
     : mDelay { delay }
 {}
-    
+
 void ProgressTracker::Subscribe(Subscriber& sub)
 {
     for (int i = 0; i < 32; ++i)

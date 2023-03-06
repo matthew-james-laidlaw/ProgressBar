@@ -6,6 +6,7 @@ add_library(
         ProgressBarView.cpp
         Terminal.cpp
         ThreadPool.cpp
+        View.cpp
 )
 
 target_include_directories(

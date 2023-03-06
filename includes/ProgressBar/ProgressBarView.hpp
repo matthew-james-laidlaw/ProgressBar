@@ -10,7 +10,7 @@ class ProgressBarView final : public Subscriber
 public:
     static std::mutex stdoutMutex;
     explicit ProgressBarView(int mTerminalRowIndex);
-    void Update(int percentComplete);
+    void Update(double percentComplete);
 private:
     void Draw();  
     std::string mBuffer;

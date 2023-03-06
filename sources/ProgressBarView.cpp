@@ -11,7 +11,7 @@ ProgressBarView::ProgressBarView(int mTerminalRowIndex)
     , mTerminalRowIndex { mTerminalRowIndex }
 {}
   
-void ProgressBarView::Update(int percentComplete)
+void ProgressBarView::Update(double percentComplete)
 {
     mBuffer[mCurrentItem] = '=';
     ++mCurrentItem;
